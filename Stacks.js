@@ -47,10 +47,8 @@ function display(st) {
   }
   let top = st.top;
   while (top.next !== null) {
-    console.log(top);
-    top = top.next;
+    console.log(top.data);
   }
-  return top.data;
 }
 
 const starTrek = new Stack();
@@ -103,4 +101,29 @@ function parentheses(exp) {
   }
   return check;
 }
-console.log(parentheses("(((()))("));
+// console.log(parentheses('(((()))('));
+
+//st  2,6,3,5,1
+function sortStack(st) {
+  let temp; //2
+  let tempSt = new Stack();
+  while (!isEmpty(st)) {
+    temp = st.pop();
+    while (!isEmpty(tempSt) && peek(tempSt) < temp) {
+      st.push(tempSt.pop());
+    }
+    tempSt.push(temp);
+  }
+  // while(!isEmpty(tempSt)){
+  //   st.push(tempSt.pop())
+  // }
+  return tempSt;
+}
+
+let stackNum = new Stack();
+stackNum.push(5);
+stackNum.push(3);
+stackNum.push(6);
+stackNum.push(2);
+console.log(JSON.stringify(stackNum));
+console.log('****',JSON.stringify(sortStack(stackNum)));
