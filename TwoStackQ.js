@@ -1,47 +1,60 @@
 class _Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
-}class Queue {
-  constructor() {
-    this.first = null;
-    this.last = null;
-  }
-  
-  enqueue(data) {
-    const node = new _Node(data);
-  
-    if (this.first === null) {
-      this.first = node;
-    }
-  
-    if (this.last) {
-      this.last.next = node;
-    }
-    //make the new node the last item on the queue
-    this.last = node;
-  }
-  dequeue() {
-    //if the queue is empty, there is nothing to return
-    if (this.first === null) {
-      return;
-    }
-    const node = this.first;
-    this.first = this.first.next;
-    //if this is the last item in the queue
-    if (node === this.last) {
-      this.last = null;
-    }
-    return node.value;
+  constructor(data, next) {
+    this.data = data;
+    this.next = next;
   }
 }
-// implement stacks using plain arrays with push and pop functions
-var Stack1 = [];
-var Stack2 = [];
 
-// implement enqueue method by using only stacks
-// and the push and pop functions
+class Stack {
+  constructor() {
+    this.top = null;
+  }
+  push(data) {
+    /* If the stack is empty, then the node will be the
+       top of the stack */
+    if (this.top === null) {
+      this.top = new _Node(data, null);
+      return this.top;
+    }
+
+    const node = new _Node(data, this.top);
+    this.top = node;
+  }
+  pop() {
+    const node = this.top;
+    this.top = node.next;
+    return node.data;
+  }
+  length() {
+    return this.top;
+  }
+}
+
+function peek(st) {
+  return st.top;
+}
+
+function isEmpty(st) {
+  if (st.top == null) {
+    return true;
+  }
+  return false;
+}
+
+function display(st) {
+  if (st.top === null) {
+    return 'this stack is empty';
+  }
+  let top = st.top;
+  while (top.next !== null) {
+    console.log(top.data);
+  }
+}
+
+let Stack1 = new Stack();
+let Stack2 = new Stack();
+
+
 function Enqueue(element) {
   Stack1.push(element);
 }
@@ -50,13 +63,15 @@ function Enqueue(element) {
 // from stack 1 into stack 2, which reverses the order
 // and then popping from stack 2
 function Dequeue() {
-  if (Stack2.length === 0) {
-    if (Stack1.length === 0) { return 'Cannot dequeue because queue is empty'; }
-    while (Stack1.length > 0) {
-      var p = Stack1.pop();
-      Stack2.push(p);
-    }
+  if (!isEmpty(Stack1)){
+    return 'Queue is empty';
   }
+    
+  while (!isEmpty(Stack1)) {
+    var p = Stack1.pop();
+    Stack2.push(p);
+  }
+  
   return Stack2.pop();
 }
 
@@ -65,3 +80,7 @@ Enqueue('b');
 Enqueue('c');
 Dequeue(); 
   
+console.log(Stack1);
+
+console.log(Dequeue());
+console.log(Stack2)
