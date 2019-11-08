@@ -43,7 +43,7 @@ function isEmpty(st) {
 
 function display(st) {
   if (st.top === null) {
-    return "this stack is empty";
+    return 'this stack is empty';
   }
   let top = st.top;
   while (top.next !== null) {
@@ -52,19 +52,19 @@ function display(st) {
 }
 
 const starTrek = new Stack();
-starTrek.push("Krik");
-starTrek.push("Spock");
-starTrek.push("McCoy");
-starTrek.push("Scotty");
+starTrek.push('Krik');
+starTrek.push('Spock');
+starTrek.push('McCoy');
+starTrek.push('Scotty');
 //console.log(peek(starTrek));
 // console.log(isEmpty(starTrek));
 // starTrek.pop('McCoy');
 //  console.log(display(starTrek));
 
 function is_palindrome(s) {
-  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
   let st = new Stack();
-  let revStr = "";
+  let revStr = '';
   for (let i = 0; i < s.length; i++) {
     st.push(s[i]);
   }
@@ -83,20 +83,20 @@ function is_palindrome(s) {
 function parentheses(exp) {
   let st = new Stack();
   let check = null;
-  if (exp[0] !== "(") {
-    return "missing opening parentheses";
+  if (exp[0] !== '(') {
+    return 'missing opening parentheses';
   }
   for (let i = 0; i < exp.length; i++) {
     st.push(exp[i]);
   }
   for (let i = 0; i < exp.length; i++) {
     if (
-      (exp[i] === "(" && st.pop() === ")") ||
-      (exp[i] === ")" && st.pop() === "(")
+      (exp[i] === '(' && st.pop() === ')') ||
+      (exp[i] === ')' && st.pop() === '(')
     ) {
       check = true;
     } else {
-      return "parentheses is missing";
+      return 'parentheses is missing';
     }
   }
   return check;
@@ -126,4 +126,4 @@ stackNum.push(3);
 stackNum.push(6);
 stackNum.push(2);
 console.log(JSON.stringify(stackNum));
-console.log('****',JSON.stringify(sortStack(stackNum)));
+console.log('****', JSON.stringify(sortStack(stackNum)));
